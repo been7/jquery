@@ -1,0 +1,18 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    console.log($('a').attr('href')) // 0번째 원소만 읽음.
+
+    $('a').attr('href', 'https://www.daum.net/') // 컬렉션 안의 모든 원소의 href 속성값을 바꿈.
+
+    $('a').attr({ //n개의 어트리뷰트 라이트
+        href: 'https://jquery.com',
+        target:'_blank' // 새 창 띄우기
+    })
+
+    $('a').removeAttr('target')
+})
+</script>
+
+<a href='https://www.google.co.kr/'>google</a>
+<a href='https://www.naver.com/'>naver</a>

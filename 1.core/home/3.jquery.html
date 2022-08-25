@@ -1,0 +1,17 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+    let msg = 'div.foo가 '
+// hint: 제이쿼리가 리턴하는 컬렉션은 배열이다.
+    $(() => {
+        /*
+        if($('div.foo').length) msg += '있다.'
+        else msg += '없다.'
+        */
+        msg += $('div.foo').length ? '있다.' : '없다.'
+        console.log(msg)
+    })
+</script>
+
+<body>
+    <div class='foo1'></div>
+</body>

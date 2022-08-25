@@ -1,0 +1,31 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    console.log($('h1').html()) //0번째객체 리턴(read)
+
+    $('footer').html('<mark>foot</mark>') // write는 모든원소리턴
+    console.log($('footer').html()) //footer객체찾고 html 읽음.
+
+    console.log($('header').find('h1').eq(1).html()) //header의 자식중에 h1을 찾아서 리턴
+    $('header').find('h1').eq(1).html('<hr>') //html(태그들어가면 엘레멘트)
+
+    $('ul').find('li').eq(2).html('index: 2').end()
+        .eq(3).html('index: 3').end()
+        .eq(4).html('index: 4')
+})
+</script>
+
+<header>
+    <h1><b>hello</b></h1>
+    <h1>world</h1>
+</header>
+
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<footer></footer>
