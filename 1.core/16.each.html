@@ -1,0 +1,24 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('li').each((i, e) => console.log(i, e)) //index, element
+    $('li').each((i, e) => console.log(i, e.id))
+    /*
+    0 'a'
+    1 'b'
+    2 'c'
+    */
+
+    jQuery.each([1, 2, 3, 4], (i, e) => console.log(`[${i}]: `, e)) //유틸리티each에서는 array 대상으로 each
+
+    $.each($('li').toArray(), (i, e) => console.log(i, e))
+
+    $.each({name: 'adelia', age: 20}, (k, v) => console.log(k, ':', v)) //메소드이터레이팅    
+})
+</script>
+
+<ul>
+    <li id='a'>A</li>
+    <li id='a'>B</li>
+    <li id='a'>C</li>
+</ul>

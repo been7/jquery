@@ -3,10 +3,14 @@
 $(() => {
     $('<div>').appendTo('hr')
 
+    /*
     $('<div>', { // 두번째 파라미터타입은 객체. 첫번째는 string?
         html: '<p class="center">red</p>',
         class: 'red' // 여기까지는 그냥 객체 생성일 뿐. 화면출력X
     }).appendTo('hr')
+    */
+    // 과제: 위 $() 파라미터를 하나로 줄여라.
+    $('<div class="red"><p class="center">red</p></div>').appendTo('hr')
 })
     
 </script>

@@ -1,0 +1,18 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('body').data('foo', 10) //data 파라미터 첫번째 key, 두번째 value
+    $('body').data('bar', {isManual: true}) // value는 object으로 줌. value type = any
+    $('body').data({ // write, 데이터두개 한방에 넣기
+        baz: [1, 2],
+        hoi: 'hello'
+    })
+
+    console.log($('body').data('foo'))
+    console.log($('body').data('bar'))
+
+    console.log($('body').data()) //파라미터 없이 호출하면 객체리턴. 모든 엔트리가 들어있음
+    
+})
+</script>
+

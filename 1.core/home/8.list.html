@@ -1,7 +1,15 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <script>
 $(() => {
-    $('<li></li>').appendTo('ul')
+    /*
+    for(let i = 0; i < 10; i++)
+        $(`<li>item ${i}</li>`).appendTo('ul')
+    */
+    let items = []
+    for(let i = 0; i < 10; i++)
+        items.push(`<li>item ${i}</li>`)
+    
+        $(items.join('')).appendTo('ul') // li가 열개있는 html콘텐츠를 만들어서 넣는다.
 
 })
     

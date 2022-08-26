@@ -1,0 +1,21 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    let h1 = $('h1')
+    //결국 class는 add 아니면 remove
+    h1.addClass('blue')
+    h1.removeClass('blue')
+    h1.toggleClass('blue') //remove시점에 toggle하니까 add가 됨.
+
+    h1.hasClass('blue') && console.log('blue') // blue. 8번 토글로 blue니까 true 출력됨.
+})
+</script>
+<!-- class 이용해서 style 조정 -->
+<style>
+.blue {
+    color: blue;
+}
+</style>
+
+<h1>HELLO</h1>
+<h1>WORLD</h1>

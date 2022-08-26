@@ -1,0 +1,26 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    console.log($('.4').parent()) //parent()하면 바로 위의 부모 찾아서 리턴함.
+
+    console.log($('.4').parents()) // html까지 간다.
+
+    console.log($('.4').parents('div')) // 부모 중 div만 골라냄.
+
+    console.log($('.4').parentsUntil('div.1')) // Until은 미만.
+
+    console.log($('.4').closest('div')) // 나 이상에서 div. 마침 내가 div라서 내가 리턴됨    
+})
+</script>
+
+<pre>
+    <div class='1'>
+        <div class='2-1'>
+            <div class='3'>
+                <div class='4'></div>
+            </div>
+        </div>
+        <div class='2-2'></div>
+        <div class='2-3'></div>
+    </div>
+</pre>

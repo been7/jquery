@@ -4,7 +4,7 @@ $('#myId') // <div id='myId><div> 이 div 엘레멘트가 컬렉션안에 들어
 $('.myClass') //css에서는 .으로 표현...
 
 // 과제: name attribute value 가 surname(속성) 인 input(객체) DOM 들을 찾아라.
-$('input[name="surname"]') // <input name='surname'/> 이 엘레멘트 찾는 것..
+$('input[name="surname"]') // <input name='surname'/> 이 엘레멘트 찾는 것.. 태그셀렉터
 
 $('#contents ul.people li')
 // 위 selector 에 해당하는 HTML code 를 작성하라.
@@ -17,9 +17,9 @@ $('#contents ul.people li')
 </div>
 */ 
 
-$('a.external:first')
+$('a.external:first') //마지막은 last
 /*
-<a class='external'></a> // first 붙어있어서 얘만 리턴됨.
+<a class='external'></a> -- first 붙어있어서 얘만 리턴됨.
 <a class='external'></a>
 */
 
@@ -73,7 +73,7 @@ $('ul li').not('.current') // not에서 리턴하는 컬렉션에 들어있는 l
 $('ul li').eq(1) // 1번 인덱스의 객체를 찾아내고싶다. equal. 67번줄 찾아냄. 한놈만.
 // 73번까진 css 복습,, 75부턴 javascript 복습
 $('form :button') // 스페이스바 디펜던트? button like?
-/*
+/* 버튼이랑 버튼타입 리턴
     <form>
         <button></button> -- 얘랑
         <input type='button'/> -- 얘가 리턴됨
@@ -83,7 +83,7 @@ $('form :button') // 스페이스바 디펜던트? button like?
 $('form :radio') // <input type='radio'/>
 $('form :checkbox') // < input type='checkbox'/>
 
-$('form :checked') // 폼에서 체크된 녀석들을 찾겠다
+$('form :checked') // 폼에서 체크된 녀석들을 찾겠다 체크된옵션
 /*
 <input type='radio'/> -- 체크된 라디오
 <input type='checkbox'/> -- 
@@ -115,7 +115,7 @@ $('form :password') // <input type='password'/>
 $('form input[name="gender"]:radio') // : 앞에 스페이스X -> 자식 아닌 것.
 // 과제: 위 selector 에 해당하는 HTML code 를 작성하라.
 /*
-<form> <input  type='radio' name='gender'/> </form>
+<form> <input type='radio' name='gender'/> </form>
 */
 
 $('form :reset') // <input type='reset'/>
