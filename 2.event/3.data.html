@@ -1,0 +1,16 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('button').click('abel', e => { //abel이란 데이터가 event객체안에 들어감. 핸들러안에서 사용?
+        let userName = $('input').val()
+        if(userName == e.data)
+            $('span').text(` valid: ${e.data}`).show().fadeOut(3000)
+        else $('span').text(` invalid: ${userName}`)
+    }) 
+})
+</script>
+
+<form>
+    <input type='text' name='userName' placeholder='사용자명'/><span></span><br>
+    <button type='button'>submit</button>
+</form>

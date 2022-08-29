@@ -1,0 +1,28 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('button').click(() => {
+        // 과제: userName field에 값을 입력했으면, 을 구현하라.
+        if($(':text').val()) $('form').submit() // handler 없고 submit 이벤트 발생시키는중.
+        // 과제: '사용자명을 입력하세요.' error message 를 <span>에 출력하라.
+        // else $('span').append('<mark>사용자명을 입력하세요.</mark>')
+        // else $('span').html('<mark>사용자명을 입력하세요.</mark>')
+        // else $('span').text('사용자명을 입력하세요.')
+
+        // 과제: 에러메세지를 빨간색으로 출력하라.
+        // else $('span').text('사용자명을 입력하세요.').css('color', 'red') //css(property name, property value)        
+        
+        // 과제: 에러메세지를 빨간색으로 출력하라. 그리고,
+        //        userName filed의 border를 점선으로 바꿔라.
+        else {
+            $('span').text('사용자명을 입력하세요').css('color', 'red') 
+            $(':text').css('border', 'red .1rem dotted')
+        }
+    })
+})
+</script>
+
+<form>
+    <input type='text' name='userName' placeholder='사용자명'/><span></span><br>
+    <button type='button'>submit</button>
+</form>

@@ -1,0 +1,30 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    let greet = ' hello world '
+    log(greet.replace(' ', '')) // 처음 스페이스만 잡음
+    log(greet.replaceAll(' ', '')) // 다 바뀜
+    log(greet.replace(/\s/g, '')) // \s스페이스를 g글로벌하게 소스자체를 뒤집겠다?
+    log(greet.replace(/^\s/g, '')) // 처음 스페이스만
+    log(greet.replace(/\s$/g, '')) // 마지막 스페이스
+    log(greet.replace(/^\s|\s$/g, '')) // 또는
+
+    greet = '1-2-3,4,5'
+    console.log(greet.replace(/-/g, '')) // - 제거
+    console.log(greet.replace(/,/g, '')) // , 제거
+    console.log(greet.replace(/[-,]/g, '')) // -, 제거 [각각독립적]
+
+    greet = '1-,2-,3'
+    console.log(greet.replace(/-,/g, '')) //-, 하나라서 [안씀]
+    
+    greet = 'hello\nworld'
+    console.log(greet)
+    // 과제: helloworld 가 출력되도록 하라.
+    console.log(greet.replace(/\n/g, ''))
+})
+
+function log(str) {
+    console.log('|' + str + '|')
+}
+</script>
+

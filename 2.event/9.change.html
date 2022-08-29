@@ -1,0 +1,37 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    /*
+    $('#wrap').on({
+        change() { //change 이벤트 핸들러가 발생하면,
+            $('span').text($(this).val())
+        }
+    })
+    */
+    // 과제: span 에 메세지가 출력되도록 하라.
+    /*
+    $('#wrap').on({
+        change() {
+            $('span').text($(this).val())
+        }
+    }, '.c') //c클래스 붙어있는 자식찾아서..span작동하게함
+    */
+    $('#wrap').on('change', '.c', function() {
+        $('span').text($(this).val())
+    })
+})
+</script>
+
+<div id='wrap'>
+    <select id='fruit' class='c'>
+        <option>select1</option>
+        <option>select2</option>
+    </select>
+
+    <input type='checkbox' value='check' class='c'/>
+    <input type='radio' value='radio' class='c'/>
+
+    <input type='text' class='c'/> <!-- enter key 를 눌러야, change event 가 발생한다.-->
+</div>
+
+<span></span>

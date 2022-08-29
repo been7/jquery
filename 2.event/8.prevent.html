@@ -1,0 +1,11 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => { // 기본핸들러말고 다른거 쓰고싶어.. 링크이동말고..
+    $('a').click(e => {
+        e.preventDefault() // event에 대한 기본핸들러를 막겠다.
+        $('body').append('<p>prevent default handler</p>')
+    })
+})
+</script>
+
+<a href='http://jquery.com'>jquery</a>

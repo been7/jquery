@@ -1,0 +1,56 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('#wrap').on({
+        mouseenter: function() { //mouseenter이벤트가 발생한 객체가 this
+            $(this).removeClass().addClass('circle mouseenter')
+        },
+        // 과제: method 표기법으로 mouseleave handler 를 작성하라.
+        //       handler는 background 색을 없앤다.
+        mouseleave() {
+            $(this).removeClass().addClass('circle mouseleave')
+        }
+
+    }, '.circle') // 객체, 셀렉터circle
+
+    // $('button').on('click', () => $('#wrap').append($('.circle'))) -- 뒤집힘?
+    // $('button').on('click', () => $('#wrap').append($('.circle').clone()))
+    // 과제: create 버튼을 누를 때마다, 새로운 원 하나가 append 되도록 하라.
+    // $('button').on('click', () => $('#wrap').append($('.circle').eq(0).clone()))
+    $('button').on('click', () => $('#wrap').append($('.circle').first().clone())) // eq(0) = first()
+})
+</script>
+
+<style>
+#wrap { /* wrap객체 */
+    margin: 1rem;
+}
+
+.circle {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 2.5rem;
+    border: .1rem solid;
+}
+
+.square {
+    width: 5rem;
+    height: 5rem;
+    border: .1rem solid;
+}
+
+.mouseenter {
+    background: red;
+}
+
+.mouseleave {
+    background: '';
+}
+</style>
+
+<button type='button'>create</button>
+
+<div id='wrap'> <!--컨테이너객체,,둘러싸다-->
+    <div class='circle'></div>
+    <div class='square'></div>
+</div>

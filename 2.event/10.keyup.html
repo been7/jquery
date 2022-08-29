@@ -1,0 +1,11 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('input').keyup(function() { //keyup은 엔터안눌러도댐.change이벤트는 엔터눌러야함
+        $('span').text($(this).val())
+    })
+})
+</script>
+
+<input type='text'/>
+<span></span>

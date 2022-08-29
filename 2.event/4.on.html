@@ -1,0 +1,13 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('button').on('click', () => $('span').text(' clicked.')) //버튼에 클릭이벤트가 발생하면 핸들러로 이 녀석을 작동시켜라
+
+    $('button').on({ // event 이름은 key라서 하나만 등록가능?
+        mouseover: () => $('span').text(' overed.'),
+        mouseout: () => $('span').text(' outed.')
+    })
+})
+</script>
+
+<button type='button'>confirm</button><span></span>

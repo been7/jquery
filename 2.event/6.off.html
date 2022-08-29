@@ -1,0 +1,25 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('div').on({
+        mousedown: () => $('div').css('background', 'red'),//event key, handler value
+        mouseup: () => $('div').css('background', 'green'),
+        mouseout: () => $('div').css('background', '')
+    }) // }여기는 자식한테 줄 때 자식쓰면됨)
+
+    $('button').click(() => $('div').off('mouseup'))
+}) // 지금까지 유저가 이벤트를 발생시켰음.
+</script>
+
+<style>
+div {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 2.5rem;
+    border: .1rem solid;
+    margin: 1rem;
+}
+</style>
+
+<div></div>
+<button type='button'>remove</button>

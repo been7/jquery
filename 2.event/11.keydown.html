@@ -1,0 +1,14 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $(':password').keydown(e => {
+        if(e.keycode == 13) $('form').submit() //enter key 코드값 13. 엔터키가 눌렸으면,,
+    })
+})
+</script>
+
+<form>
+    <input type='text' name='id'/>
+    <input type='password' name='pw'/>
+    <input type='submit'/>
+</form>
