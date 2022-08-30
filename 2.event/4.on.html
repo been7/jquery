@@ -2,11 +2,11 @@
 <script>
 $(() => {
     $('button').on('click', () => $('span').text(' clicked.')) //버튼에 클릭이벤트가 발생하면 핸들러로 이 녀석을 작동시켜라
-
+//첫번째파라미터 이벤트이름 두번째는 핸들러
     $('button').on({ // event 이름은 key라서 하나만 등록가능?
         mouseover: () => $('span').text(' overed.'),
         mouseout: () => $('span').text(' outed.')
-    })
+    }) //n개의엔트리가 파라미터로 있는 핸들러를 on에 넣어라?
 })
 </script>
 

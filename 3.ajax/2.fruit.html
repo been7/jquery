@@ -1,0 +1,41 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    let table = $('tbody')
+
+    $('button').click(() => {
+        $.ajax({
+            url: '2.data.json', //내가 준비한 데이터는 이게 전부. 준비하지않은건 ajax의 기본값으로 사용할 것이다.
+            success: data => { // 석세스핸들러에서 하는 일은 tr 테이블 채우는 일?
+                // 과제: table 을 채워라.
+                let fruits = data.fruits //객체.fruits 하면 배열밸류 얻음...
+                let fruit, col, val, tr, td //val값이 td의 text로 들어간다?
+                //커서가 가리키는곳을 for(여기서) 표현..
+                for(let row in fruits) { //tr. in썼으니 key 읽어오는 것.
+                    fruit = fruits[row] //비지니스로직
+                    tr = table.find('tr').eq(row) //프레젠테이션로직.화면에서 0번째 row 찾아가야지.
+                    
+                    col = 0
+                    for(let key in fruit) { //td. fruitsName, price 이런거 key에..
+                        val = fruit[key] //fruit[fruitName]하면 사과 담김..
+                        td = tr.find('td').eq(col++)
+                        td.text(val)
+                    }
+                }
+            }
+        })
+    })
+})
+</script>
+
+<button type='button'>load</button>
+
+<table> <!-- A 화면이다, B화면은 딸기사과 이런거 집어넣는거 -->
+    <thead>
+        <tr><th>이름</th><th>가격</th><th>기한</th><th>생산자</th></tr>
+    </thead>
+    <tbody>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+</table>

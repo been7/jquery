@@ -8,8 +8,8 @@ $(() => {
             type: 'get', //리퀘스트타입 5개 중,, get: 읽을게,read할테니까 줘
             dataType: 'json', //client는 json타입 데이터 받을 준비 됐구나.
             success: (data, status, xhr) => { //xhr에 객체담김. xml http request?
-                $('<h3>').text(data.userName).appendTo('table')
-                $('<p>').html(status).appendTo('table')
+                $('<h3>').text(data.userName).appendTo('body')
+                $('<p>').html(status).appendTo('body')
                 console.log(xhr)
 
             },
@@ -27,9 +27,5 @@ $(() => {
 </script>
 
 <button type='button'>click</button>
-
-<table>
-
-</table>
 
 <!-- Asynchrous Javascript And Xml-->

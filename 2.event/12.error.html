@@ -1,8 +1,11 @@
 <script>
 window.onerror = (msg, url, line, col, err) => {
-    document.write(`${msg}<br>`)
+    document.write(`${msg} <br>`) //화면에 추가하는거라서 <br> html이용가능
+    document.write(`at ${line}:${col} of ${url}`)
+    document.write('<hr>')
+    document.write(err)
 }
 
-a;
+a // ReferenceError: a is not defined.
 </script>
 

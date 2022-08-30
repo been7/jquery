@@ -1,6 +1,6 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <script>
-$(() => {
+$(() => { // foreach의 callback 파라미터는 e, i 순이다.
     $('li').each((i, e) => console.log(i, e)) //index, element
     $('li').each((i, e) => console.log(i, e.id))
     /*

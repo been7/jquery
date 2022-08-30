@@ -16,7 +16,7 @@ $(() => {
         }
     }, '.c') //c클래스 붙어있는 자식찾아서..span작동하게함
     */
-    $('#wrap').on('change', '.c', function() {
+    $('#wrap').on('change', '.c', function() { //e이름, 자식객체찾아내는셀렉터, 핸들러
         $('span').text($(this).val())
     })
 })
