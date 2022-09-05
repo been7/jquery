@@ -1,35 +1,198 @@
-<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-<script>
-$(() => {
-    $('button').click(() => { //request에 관한 내용
-        $.ajax({ //ajax를 구현하는데 필요한 속성값들은 객체형태로 파라미터에 넣어주면된다.
-            url: '1.data.json', //key(url)등 쓸 수 있는건 api문서를 통해 확인 가능.
-            data: {id: 'yellow'}, //시리얼라이징해서 보냄?담음?
-            type: 'get', //리퀘스트타입 5개 중,, get: 읽을게,read할테니까 줘
-            dataType: 'json', //client는 json타입 데이터 받을 준비 됐구나.
-            success: (data, status, xhr) => { //xhr에 객체담김. xml http request?
-                $('<h3>').text(data.userName).appendTo('table')
-                $('<p>').html(status).appendTo('table')
-                console.log(xhr)
+<head>
+    <title>hr.jquery</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+    <link rel='stylesheet' href='http://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css'/>
+    <script> // data base을 쓴다
+        const laborers = [] // 순수하게 노동자 객체가 들어갈 배열
+        let laborerId = 0
 
-            },
-            error: (xhr, status) => { //response를 받았더니 에러다
-                console.log('error: ', status)
-                console.log(xhr)
-            },
-            complete: (xhr, status) => { //reponse가 성공이든 실패든 꼭 하고싶은 작업이 있다면 complete에 넣어라
-                console.log('comple: ', status)
+        function isVal(field) {// 입력값 검사 - 있다, 없다만 검사한다, field를 파라미터로 받는다
+            let isGood = false
+            let errMsg
+
+            if(!field.length) errMsg = '노동자를 선택하세요.'
+            else {
+                if(!field.val()) errMsg = field.attr('placeholder') + ' 입력하세요.' // 여기서 attr은 제이쿼리의 attr이다
+                else isGood = true
+            } 
+
+            if(!isGood) {
+                $('#modalMsg').text(errMsg).caa('color', 'red')
+                $('#modalBtn').hide() // 예, 아니오 버튼은 감춘다
+                $('#modal').modal()
             }
 
-        })
-    })
-})
-</script>
+            return isGood
+        }
 
-<button type='button'>click</button>
+        function listLaborers() { // tbody에 해당하는 fn
+            $('input').not(':radio').val('') // 입력값 청소먼저한다, val 값을 없애갰다(empty string)
+            $('#laborers').empty()
 
-<table>
+            if(laborers.length) {
+                const laborerArr = [] // 랜더링을 위해 만드는 배열, html 코드가 들어간다
 
-</table>
+                $.each(laborers, (i, laborer) => {
+                    laborerArr.unshift(
+                        `<tr> 
+                            <td><input type='radio' name='laborerId' id='laborerId'
+                                value='${laborer.laborerId}'/></td>
+                            <td>${laborer.laborerId}</td>
+                            <td>${laborer.name}</td>
+                            <td>${laborer.hireDate}.</td>
+                        </tr>` // 노동자 1명을 tr로 표현한다
+                    ) // <> push, unshift 내림차순으로 데이터 저장
+                }) // iterating, 웹앱에서 표는 내림차순 해야한다
 
-<!-- Asynchrous Javascript And Xml-->
+                $('#laborers').append(laborerArr.join('')) // tr부분 랜더링이 한번만 되게 한다
+            } else $('#laborers').append(
+                "<tr><td colspan='4' class='text-center'>노동자가 없습니다.</td></tr>") // 80 칼럼은 넘어가지 않는 것이 좋다
+        }
+
+        function init() { // 버튼별로 핸들러 등록 - 페이지가 로딩되자마자, 버튼을 클릭하면 핸들러가 작동하게
+            // 노동자 추가
+            $('#addLaborerBtn').click(() => {
+                if(isVal($('#laborerName')) && isVal($('#hireDate'))) {
+                    let laborer = {
+                        laborerId: ++laborerId,
+                        name: $('#laborerName').val(),
+                        hireDate: $('#hireDate').val()
+                    }
+
+                    laborers.push(laborer)
+                    listLaborers() // 성공메세지 대신 목록을 갱신해서 보여준다, UI
+                }
+            })
+
+            // 노동자 수정
+            $('#fixLaborerBtn').click(() => {
+                if($('#laborerId:checked') &&
+                    isVal($('#laborerName')) && isVal($('#hireDate'))) {
+                        let laborerId = $('#laborerId:checked').val()
+
+                        $.each(laborers, (i, laborer) => { // iterating
+                            if(laborer.laborerId == laborerId) {
+                                laborer.name = $('#laborerName').val()
+                                laborer.hireDate = $('#hireDate').val()
+                                return false // iterating을 빠져나온다
+                            }
+                        })
+
+                        listLaborers() // 목록 갱신
+                    }
+            })
+
+            // 노동자 삭제
+            $('#delLaborerBtn').click(() => {
+                if(isVal($('#laborerId:checked'))) {
+                    $('#modalMsg').text('노동자를 삭제하시겠습니까?')
+                    $('#modalBtn').show()
+                    $('#modal').modal()
+                }
+            })
+
+            $('#delLaborerOkBtn').click(() => {
+                let laborerId = $('#laborerId:checked').val()
+
+                $.each(laborers, (i, laborer) => { // iterating
+                    if(laborer.laborerId == laborerId) {
+                        laborers.splice(i, 1)
+                        return false // iterating 종료
+                    }
+                })
+
+                $('#modal').modal('hide') 
+                listLaborers() // 목록갱신
+            })  
+            
+            $('#laborers').on({
+                change() {
+                    $('#laborerName').val($(this).parent().next().next().text()) // 노동자id > 노동자 이름
+                    $('#hireDate').val($(this).parent().next().next().next().text())
+                }
+            }, '#laborerId')
+        }
+
+        $(init)
+    </script>
+    <style> /* 입사일 - 상자안에서 앞 부분에 객체를 하나 넣겠다, 뒷부분은 after, css에도 attr이 있다 */
+        #hireDate::before {
+            content: attr(placeholder); /* css 에서의 attr */
+            width: 100%; /* hireDate가 분모 - 날짜값을 넣어주면 width: 100이기 때문에 들어갈 곳이 없어서 입력되지않는다 > 해결해야한다 */
+        }
+
+        #hireDate:focus::before, #hireDate:valid::before {
+            display: none; /* before값을 없애서 날짜값을 입력한다 */
+        }
+    </style>
+</head>
+    <div class='container'>
+        <div class='row'>
+            <div class='col'>
+                <header class='jumbotron p-2'>
+                    <h1 class='text-center'>HR</h1>
+                </header>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col'>
+                <form> <!-- input: form의 파라미터-->
+                    <div class='row mb-3'>
+                        <div class='col-2'>
+                            <input type='text' class='form-control' placeholder='노동자명' id='laborerName'/>
+                        </div>
+                        <div class='col-4'>
+                            <input type='date' class='form-control' placeholder='입사일' id='hireDate' required/>
+                        </div>
+                        <div class='col'>
+                            <nav class='d-flex'>
+                                <button type='button' class='btn btn-success flex-fill mr-1' id='addLaborerBtn'> <!-- 시작에 버튼이 있기 때문에 버튼이 중요하다, 버튼에 id를 붙여준다 -->
+                                    <i class='fas fa-plus'></i><span class='label d-none d-sm-inline'>추가</span>
+                                </button>
+                                <button type='button' class='btn btn-info flex-fill mr-1' id='fixLaborerBtn'>
+                                    <i class='fas fa-edit'></i><span class='label d-none d-sm-inline'>수정</span>
+                                </button>
+                                <button type='button' class='btn btn-warning flex-fill' id='delLaborerBtn'> <!-- data- 는 지운다, 모달이 있으면 메세지를 전부 수정해야하기 때문에 -->
+                                    <i class='fas fa-trash-alt'></i><span class='label d-none d-sm-inline'>삭제</span>
+                                </button> 
+                            </nav>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <table class='table'>
+                                <thead><tr><th></th><th>ID</th><th>이름</th><th>입사일</th></tr></thead>
+                                <tbody id='laborers'>
+                                    <tr><td colspan='4' class='text-center'>노동자가 없습니다.</td></tr>
+                                </tbody>                                
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class='modal fade' tabindex='-1' id='modal'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <button type='button' class='close' data-dismiss='modal'>
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class='modal-body'>
+                    <p id='modalMsg'></p>
+                </div>
+                <div class='modal-footer' id='modalBtn'>
+                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>아니오</button>
+                    <button type='button' class='btn btn-primary' id='delLaborerOkBtn'>예</button>
+                </div>
+            </div>
+        </div>
+    </div>
